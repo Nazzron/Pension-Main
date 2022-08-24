@@ -1,0 +1,5 @@
+version: 0.0
+os: linux
+files:
+  - source: ./process-pension-service-1.0-SNAPSHOT.jar
+    destination: /tmp
