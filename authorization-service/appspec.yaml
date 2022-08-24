@@ -1,5 +1,11 @@
-version: 0.0
-os: linux
-files:
-  - source: ./auth-service-1.0-SNAPSHOT.jar
-    destination: /tmp
+version: 1.0
+Resources:
+  - TargetService:
+      Type: AWS::ECS::SERVICE
+      Properties:
+        TaskDefinition: "arn:aws:ecs:ap-south-1:854585762102:task-definition/auth-service:2"
+        LoadBalancerInfo:
+          ContainerName: "auth-service"
+          ContainerPort: "8081"
+        PlatformVersion: "LATEST"
+     
