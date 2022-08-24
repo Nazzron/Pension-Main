@@ -1,0 +1,10 @@
+server:
+ port: 8083
+ servlet:
+   context-path: /api/pensioner-detail
+
+spring:
+  application:
+    name: pensioner-detail-service
+
+errorMessage: Aadhaar Number Not Found
