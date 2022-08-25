@@ -1,32 +1,13 @@
 version: 0.2
 
 phases:
-  install:
-    runtime-versions:
-      java: corretto17
-  pre_build:
-    commands:
-    - echo Logging in to Amazon ECR...
-    - aws --version
-    - aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 854585762102.dkr.ecr.ap-south-1.amazonaws.com
-    - IMAGE_NAME=ecr-auth-service
-    - IMAGE_URI=854585762102.dkr.ecr.ap-south-1.amazonaws.com/auth-service:latest
-    - CONTAINER_NAME=auth-service
   build:
     commands:
-      - echo Build started on `date`
-      - echo $IMAGE_NAME
-      - mvn clean package -Ddockerfile.skip
-      - docker build -t $IMAGE_NAME
+      - echo Entered the build phase...
+      - mvn clean package
   post_build:
     commands:
-      - echo Build completed on `date`
-      - echo $(docker images)
-      - docker tag $IMAGE_NAME $IMAGE_URI
-      - echo Pushing docker image
-      - docker push $IMAGE_URI
-      - echo push completed
-      - printf '[{"name":"%s", "imageUri":"%s"}]' $CONTAINER_NAME $IMAGE_URI > imagedefinitions.json
+      - echo Build completed successfully
 artifacts:
   files:
-    - imagedefinitions.json
+  discard-paths: yes
